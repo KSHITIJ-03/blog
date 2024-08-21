@@ -33,6 +33,12 @@ app.post('/events', (req, res) =>{
 
         post.comments.push({id, content})
     }
+    if(type === 'removeComment'){
+        const {id, postId, content} = data
+        const post = posts[postId]
+
+        post.comments = post.comments.filter(item => item.id !== id)
+    }
 
     console.log(posts);
     

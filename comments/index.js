@@ -17,6 +17,7 @@ app.post('/posts/:id/comments', async (req, res) => {
     const comments = commentsByPostId[req.params.id] || []
     comments.push({id, content})
     commentsByPostId[req.params.id] = comments
+    console.log(commentsByPostId);
 
     await axios.post('http://127.0.0.1:4005/events', {
         type : 'commentCreated',
@@ -24,7 +25,6 @@ app.post('/posts/:id/comments', async (req, res) => {
             id, postId, content
         }
     })
-    console.log(commentsByPostId);
     
     res.status(201).json(comments)
 })
@@ -32,6 +32,13 @@ app.post('/posts/:id/comments', async (req, res) => {
 
 app.post('/events', (req, res) => {
     console.log('event recieved : ' + req.body.type);
+    const {type, data} = req.body
+    if(type === 'removeComment'){
+        const {id, postId, content} = data
+        console.log(data);
+        commentsByPostId[postId] = commentsByPostId[postId].filter(item => item.id !== id)
+        console.log(commentsByPostId[postId]);
+    }
     res.send({})
 })
 
