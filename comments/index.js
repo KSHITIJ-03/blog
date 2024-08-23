@@ -18,11 +18,11 @@ app.post('/posts/:id/comments', async (req, res) => {
     comments.push({id, content})
     commentsByPostId[req.params.id] = comments
     console.log(commentsByPostId);
-
+    let status = 'pending'
     await axios.post('http://127.0.0.1:4005/events', {
         type : 'commentCreated',
         data : {
-            id, postId, content
+            id, postId, content, status
         }
     })
     

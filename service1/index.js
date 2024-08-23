@@ -27,18 +27,19 @@ app.post('/events', (req, res) =>{
         posts[id] = {id, title, comments : []}
     }
     if(type === 'commentCreated') {
-        const {id, content, postId} = data
+        const {id, content, postId, status} = data
 
         const post = posts[postId]
-
+        console.log(post);
+        
         post.comments.push({id, content})
     }
-    if(type === 'removeComment'){
-        const {id, postId, content} = data
-        const post = posts[postId]
+    // if(type === 'removeComment'){
+    //     const {id, postId, content} = data
+    //     const post = posts[postId]
 
-        post.comments = post.comments.filter(item => item.id !== id)
-    }
+    //     post.comments = post.comments.filter(item => item.id !== id)
+    // }
 
     console.log(posts);
     
