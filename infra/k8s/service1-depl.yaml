@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: event-bus-depl
+  name: service1-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: event-bus
+      app: service1
   template:
     metadata:
       labels:
-        app: event-bus
+        app: service1
     spec: 
       containers:
-        - name: event-bus
-          image: kshitij591/event-bus:latest
+        - name: service1
+          image: kshitij591/service1:latest
           imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata: 
-  name: event-bus-srv
+  name: service1-srv
 spec: 
   selector: 
-    app: event-bus
+    app: service1
   ports:
-    - name: event-bus
+    - name: service1
       protocol: TCP
-      port: 4005
-      targetPort: 4005
+      port: 4002
+      targetPort: 4002

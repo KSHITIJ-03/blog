@@ -19,7 +19,7 @@ app.post('/posts/:id/comments', async (req, res) => {
     commentsByPostId[req.params.id] = comments
     console.log(commentsByPostId);
     let status = 'pending'
-    await axios.post('http://127.0.0.1:4005/events', {
+    await axios.post('http://event-bus-srv:4005/events', {
         type : 'commentCreated',
         data : {
             id, postId, content, status
@@ -35,6 +35,7 @@ app.post('/events', (req, res) => {
     const {type, data} = req.body
     if(type === 'removeComment'){
         const {id, postId, content} = data
+        
         console.log(data);
         commentsByPostId[postId] = commentsByPostId[postId].filter(item => item.id !== id)
         console.log(commentsByPostId[postId]);

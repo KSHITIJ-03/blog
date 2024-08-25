@@ -17,21 +17,24 @@ app.post('/posts', async (req, res) => {
         id, title
     }
 
-    await axios.post('http://localhost:4005/events', {
+    await axios.post('http://event-bus-srv:4005/events', {
         type : 'postCreated',
         data : {
             id, title
         }
+    }).catch ((error) => {
+        console.error('Error making request:', error.message);
+        // Handle specific errors like socket hang up, etc.
     })
 
-    console.log(posts[id]);
+    //console.log(posts[id]);
        
     res.status(201).json(posts[id])
 })
 
 app.get('/posts', async (req, res) => {
     console.log('retrive all the posts');
-    console.log(posts);
+    // console.log(posts);
     res.send(posts)
 })
 
@@ -43,5 +46,6 @@ app.post('/events', (req, res) => {
 const PORT = 4000
 app.listen(PORT, () => {
     console.log('v55')
+    console.log('test update')
     console.log("posts server on PORT : " + PORT);
 })
