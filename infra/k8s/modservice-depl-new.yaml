@@ -1,29 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: modservice-depl
+metadata:
+  name: modservice-depl-new
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: modService
+      app: modservice
   template:
     metadata:
       labels:
-        app: modService
-    spec: 
+        app: modservice
+    spec:
       containers:
         - name: modservice
-          image: kshitij591/modservice:latest
-          imagePullPolicy: Always
+          image: kshitij591/modservice-new
 ---
 apiVersion: v1
 kind: Service
-metadata: 
-  name: modservice-srv
-spec: 
-  selector: 
-    app: modService
+metadata:
+  name: modservice-srv-new
+spec:
+  selector:
+    app: modservice
   ports:
     - name: modservice
       protocol: TCP

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: service1-depl
+metadata:
+  name: service1-depl-new
 spec:
   replicas: 1
   selector:
@@ -11,18 +11,17 @@ spec:
     metadata:
       labels:
         app: service1
-    spec: 
+    spec:
       containers:
         - name: service1
-          image: kshitij591/service1:latest
-          imagePullPolicy: Always
+          image: kshitij591/service1-new
 ---
 apiVersion: v1
 kind: Service
-metadata: 
-  name: service1-srv
-spec: 
-  selector: 
+metadata:
+  name: service1-srv-new
+spec:
+  selector:
     app: service1
   ports:
     - name: service1

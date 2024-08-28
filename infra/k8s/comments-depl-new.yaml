@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: comments-depl
+metadata:
+  name: comments-depl-new
 spec:
   replicas: 1
   selector:
@@ -11,18 +11,17 @@ spec:
     metadata:
       labels:
         app: comments
-    spec: 
+    spec:
       containers:
         - name: comments
-          image: kshitij591/comments:latest
-          imagePullPolicy: Always
+          image: kshitij591/comments-new
 ---
 apiVersion: v1
 kind: Service
-metadata: 
-  name: comments-srv
-spec: 
-  selector: 
+metadata:
+  name: comments-srv-new
+spec:
+  selector:
     app: comments
   ports:
     - name: comments

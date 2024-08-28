@@ -11,28 +11,24 @@ app.post('/events', (req, res) => {
 
     const event = req.body
 
-    axios.post('http://posts-clusterip-srv:4000/events', event).catch((err) => {
+    axios.post('http://posts-clusterip-srv-new:4000/events', event).catch((err) => {
         console.log(err.message);
     })
-    console.log('in event bus');
-    
-    axios.post('http://comments-srv:4001/events', event).catch((err) => {
+    axios.post('http://comments-srv-new:4001/events', event).catch((err) => {
         console.log(err.message);
     })
-    axios.post('http://service1-srv:4002/events', event).catch((err) => {
+    axios.post('http://service1-srv-new:4002/events', event).catch((err) => {
         console.log(err.message);
     })
-    axios.post('http://modservice-srv:4003/events', event).catch((err) => {
+    axios.post('http://modservice-srv-new:4003/events', event).catch((err) => {
         console.log(err.message);
     })
-    res.send({ status: 'OK' })  // sending back response to the client
-                                // otherwise it will lead to the client (the posts service) 
-                                // waiting indefinitely for a response. 
+
+    res.send({ status: 'OK' }) 
 
 })
 
 app.listen(4005, () => {
-    console.log('update');
     console.log('events server on port : 4005');
 })
 

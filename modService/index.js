@@ -13,17 +13,11 @@ app.post('/events', async (req, res) => {
 
     if(type === 'commentCreated') {
         console.log(data);
-        let {id, postId, content, status} = data
+        const {id, postId, content} = data
         if(content.includes('orange')) {
             console.log(true);
-            status = 'rejected'
-            await axios.post('http://event-bus-srv:4005/events', {
-                type : 'removeComment',
-                data
-            })
-        } else {
-            status = 'approved'
-            await axios.post('http://event-bus-srv:4005/events', {
+            
+            await axios.post('http://event-bus-srv-new:4005/events', {
                 type : 'removeComment',
                 data
             })

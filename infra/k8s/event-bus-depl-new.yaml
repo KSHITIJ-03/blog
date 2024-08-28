@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: event-bus-depl
+metadata:
+  name: event-bus-depl-new
 spec:
   replicas: 1
   selector:
@@ -11,18 +11,17 @@ spec:
     metadata:
       labels:
         app: event-bus
-    spec: 
+    spec:
       containers:
         - name: event-bus
-          image: kshitij591/event-bus:latest
-          imagePullPolicy: Always
+          image: kshitij591/event-bus-new
 ---
 apiVersion: v1
 kind: Service
-metadata: 
-  name: event-bus-srv
-spec: 
-  selector: 
+metadata:
+  name: event-bus-srv-new
+spec:
+  selector:
     app: event-bus
   ports:
     - name: event-bus

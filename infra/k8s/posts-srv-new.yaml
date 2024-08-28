@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Service
-metadata: 
-  name: post-srv
-spec: 
+metadata:
+  name: posts-srv-new
+spec:
   type: NodePort
-  selector: 
+  selector:
     app: posts
-  ports: 
+  ports:
     - name: posts
+      protocol: TCP
       port: 4000
       targetPort: 4000

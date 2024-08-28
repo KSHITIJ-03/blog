@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: posts-depl
+metadata:
+  name: posts-depl-new
 spec:
   replicas: 1
   selector:
@@ -11,18 +11,17 @@ spec:
     metadata:
       labels:
         app: posts
-    spec: 
+    spec:
       containers:
         - name: posts
-          image: kshitij591/posts:latest
-          imagePullPolicy: Always 
+          image: kshitij591/posts-new
 ---
 apiVersion: v1
 kind: Service
-metadata: 
-  name: posts-clusterip-srv
-spec: 
-  selector: 
+metadata:
+  name: posts-clusterip-srv-new
+spec:
+  selector:
     app: posts
   ports:
     - name: posts
