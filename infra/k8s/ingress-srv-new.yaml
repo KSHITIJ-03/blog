@@ -10,11 +10,31 @@ spec:
     - host: test-app.com
       http:
         paths:
-          - path: /posts
+          - path: /posts/create
             pathType: Prefix
             backend:
               service:
                 name: posts-clusterip-srv-new
                 port:
                   number: 4000
-
+          - path: /posts
+            pathType: Prefix
+            backend:
+              service:
+                name: service1-srv-new
+                port:
+                  number: 4002
+          - path: /posts/?(.*)/comments
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: comments-srv-new
+                port:
+                  number: 4001
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: client-srv-new
+                port:
+                  number: 3000

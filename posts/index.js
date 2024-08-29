@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 
 const posts = {}
 
-app.post('/posts', async (req, res) => {
+app.post('/posts/create', async (req, res) => {
     console.log('create a post');
     const id = randomBytes(4).toString('hex')
     const {title} = req.body
